@@ -9,11 +9,11 @@ To test the deployment, an environment variable called **BACKGROUND_COLOR** can 
 ## Build image
 
 ```
-podman build -t bg .
+podman build -t blue-green .
 ```
 
 ## Run application
 
 ```
-podman run -p 8080:8080 -e 'BACKGROUND_COLOR=blue' bg:latest
+podman run -p 8080:8080 -e 'BACKGROUND_COLOR=blue' blue-green:latest
 ```

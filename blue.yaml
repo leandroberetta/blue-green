@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue-green
+spec:
+  selector:
+    matchLabels:
+      app: blue-green
+      version: v1
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: blue-green
+        version: v1
+    spec:
+      containers:
+      - name: blue-green
+        image: quay.io/leandroberetta/blue-green
+        ports:
+        - containerPort: 8080
+        env:
+        - name: BACKGROUND_COLOR
+          value: blue
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blue-green
+spec:
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: blue-green
